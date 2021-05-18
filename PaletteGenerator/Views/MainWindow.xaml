@@ -1,0 +1,13 @@
+﻿<Window x:Class="PaletteGenerator.Views.MainWindow"
+        xmlns="http://schemas.microsoft.com/winfx/2006/xaml/presentation"
+        xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
+        xmlns:prism="http://prismlibrary.com/"
+        prism:ViewModelLocator.AutoWireViewModel="True"
+        Title="{Binding Title}" 
+        Height="616" 
+        Width="986" 
+        ResizeMode="CanMinimize">
+    <Grid>
+        <ContentControl prism:RegionManager.RegionName="ContentRegion" Margin="8"/>
+    </Grid>
+</Window>

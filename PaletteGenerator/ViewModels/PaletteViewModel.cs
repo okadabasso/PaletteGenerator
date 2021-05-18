@@ -181,30 +181,12 @@ namespace PaletteGenerator.ViewModels
             if (h < 0) h += 360;
             if (h >= 360) h -= 360;
             var hsl = new HslColor(h, baseHsl.S, baseHsl.L);
-            var baseIndex = 0; // (int)(hsl.L * 10);
-            if (baseIndex >= 10) baseIndex = 9;
             var list = new List<ColorListItem>();
 
-            //// darken
-            //var darkenRatio = (hsl.L - 0.15) / (float)(baseIndex);
-            //for (var i = 0; i < baseIndex; i++)
-            //{
-            //    var l = hsl.L + (i - baseIndex) * darkenRatio;
-            //    if (l < 0) l = 0;
-            //    if (l > 1) l = 1;
-            //    var color = new SolidColorBrush(HslColor.ToRgb(new HslColor(hsl.H, hsl.S, (float)l)));
-            //    color.Freeze();
-
-            //    var foreground = l < 0.55 ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
-            //    list.Add(new ColorListItem { Background = color, Foreground = foreground });
-            //}
-
-            // lighten
-            //var lightenRatio = (0.95f - hsl.L) / (float)(9 - baseIndex);
-            var lightenRatio = (0.95f - 0.15) / 9.0f;
-            for (var i = baseIndex; i < 10; i++)
+            var ratio = (0.95f - 0.15) / 9.0f;
+            for (var i = 0; i < 10; i++)
             {
-                var l = 0.15 + (i - baseIndex) * lightenRatio;
+                var l = 0.15 + i * ratio;
                 if (l < 0) l = 0;
                 if (l > 1) l = 1;
                 var color = new SolidColorBrush(HslColor.ToRgb(new HslColor(hsl.H, hsl.S, (float)l)));

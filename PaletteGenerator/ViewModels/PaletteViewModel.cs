@@ -24,11 +24,13 @@ namespace PaletteGenerator.ViewModels
         public ReactiveCommand ToWpfResourceCommand { get; set; } = new ReactiveCommand();
         public ReactiveCommand ToCssCommand { get; set; } = new ReactiveCommand();
         public ReactiveCommand ToHtmlCommand { get; set; } = new ReactiveCommand();
+        public ReactiveCommand<string> PanelClick { get; set; } = new ReactiveCommand<string>();
         public ReactiveProperty<string> Message { get; set; } = new ReactiveProperty<string>();
         public ReactiveProperty<string> ColorCode { get; set; } = new ReactiveProperty<string>();
         public ReactiveProperty<byte> RedValue { get; set; } = new ReactiveProperty<byte>();
         public ReactiveProperty<byte> GreenValue { get; set; } = new ReactiveProperty<byte>();
         public ReactiveProperty<byte> BlueValue { get; set; } = new ReactiveProperty<byte>();
+        public ReactiveProperty<string> AreaName { get; set; } = new ReactiveProperty<string>();
         public ReactiveProperty<SolidColorBrush> ForegroundBrush { get; set; } = new ReactiveProperty<SolidColorBrush>();
         public ReactiveProperty<SolidColorBrush> BaseColorBrush { get; set; }
         public ObservableCollection<ColorListItem> PrimaryColors { get; set; } = new ObservableCollection<ColorListItem>();
@@ -137,6 +139,8 @@ namespace PaletteGenerator.ViewModels
                     ShowFlash("クリップボードにコピーしました。");
                 }
             });
+
+            PanelClick.Subscribe(areaName => { AreaName.Value = areaName; });
         }
         private void CreatePalette(SolidColorBrush baseColorBrush)
         {

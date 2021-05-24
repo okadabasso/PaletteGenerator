@@ -45,227 +45,239 @@
         <Style x:Key="PaletteItem" TargetType="{x:Type TextBlock}">
             <Setter Property="HorizontalAlignment" Value="Center"></Setter>
             <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="TextAlignment" Value="Center"></Setter>
+        </Style>
+        <Style x:Key="PaletteItemBorder" TargetType="{x:Type Border}">
+            <Setter Property="HorizontalAlignment" Value="Center"></Setter>
+            <Setter Property="VerticalAlignment" Value="Center"></Setter>
+            <Setter Property="Width" Value="56"></Setter>
+            <Setter Property="Height" Value="22"></Setter>
         </Style>
     </UserControl.Resources>
-    <DockPanel>
-        <DockPanel DockPanel.Dock="Bottom" Margin="0 8 0 0">
-            <StackPanel>
-                <Grid>
-                    <TextBlock Text="{Binding Message.Value}" Foreground="#007a70"></TextBlock>
-                </Grid>
-                <StackPanel Orientation="Horizontal" Margin="-8 0 -8 0" VerticalAlignment="Center">
-                    <Button Content="to WPF Resource" Command="{Binding ToWpfResourceCommand}" Margin="8 0 8 0"></Button>
-                    <Button Content="to CSS" Command="{Binding ToCssCommand}"  Margin="8 0 8 0"></Button>
-                    <Button Content="to html" Command="{Binding ToHtmlCommand}"  Margin="8 0 8 0"></Button>
+    <DockPanel Width="504">
+        <DockPanel DockPanel.Dock="Left">
+            <DockPanel DockPanel.Dock="Bottom" Margin="0 8 0 0">
+                <StackPanel>
+                    <Grid>
+                        <TextBlock Text="{Binding Message.Value}" Foreground="#007a70"></TextBlock>
+                    </Grid>
+                    <StackPanel Orientation="Horizontal" Margin="-8 0 -8 0" VerticalAlignment="Center">
+                        <Button Content="to WPF Resource" Command="{Binding ToWpfResourceCommand}" Margin="8 0 8 0"></Button>
+                        <Button Content="to CSS" Command="{Binding ToCssCommand}"  Margin="8 0 8 0"></Button>
+                        <Button Content="to html" Command="{Binding ToHtmlCommand}"  Margin="8 0 8 0"></Button>
+                    </StackPanel>
                 </StackPanel>
+            </DockPanel>
+            <DockPanel DockPanel.Dock="Top" Margin="0 0 0 0" >
+                <StackPanel Orientation="Vertical" >
+                    <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
+                        <Label Content="Color"></Label>
+                        <TextBox Text="{Binding ColorCode.Value}" Margin="8 0 0 0" Width="96" MaxLength="8"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 8">
+                        <Label Content="赤"></Label>
+                        <Slider Maximum="255" Width="255" VerticalAlignment="Center" Margin="0 0 8 0" Value="{Binding RedValue.Value}">
+
+                        </Slider>
+                        <TextBox Text="{Binding RedValue.Value}" Width="32" VerticalAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 8">
+                        <Label Content="緑"></Label>
+                        <Slider Maximum="255" Width="255" VerticalAlignment="Center" Margin="0 0 8 0" Value="{Binding GreenValue.Value}">
+
+                        </Slider>
+                        <TextBox Text="{Binding GreenValue.Value}" Width="32" VerticalAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+                    </StackPanel>
+                    <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 8">
+                        <Label Content="青"></Label>
+                        <Slider Maximum="255" Width="255" VerticalAlignment="Center" Margin="0 0 8 0" Value="{Binding BlueValue.Value}">
+
+                        </Slider>
+                        <TextBox Text="{Binding BlueValue.Value}" Width="32" VerticalAlignment="Center" VerticalContentAlignment="Center"></TextBox>
+                    </StackPanel>
+
+                </StackPanel>
+                <Grid Margin="8 0 0 0" DockPanel.Dock="Right">
+                    <Border BorderThickness="1" BorderBrush="#888" Background="{Binding BaseColorBrush.Value}" >
+                        <TextBlock Text="{Binding BaseColorBrush.Value.Color}" Foreground="{Binding ForegroundBrush.Value}"></TextBlock>
+                    </Border>
+                </Grid>
+            </DockPanel>
+            <StackPanel>
+                <TextBlock Text="Primary"></TextBlock>
+                <ItemsControl ItemsSource="{Binding PrimaryColors}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border Style="{StaticResource PaletteItemBorder}" Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Complemental"></TextBlock>
+                <ItemsControl ItemsSource="{Binding ComplementalColors}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Analogous"></TextBlock>
+                <ItemsControl ItemsSource="{Binding AnalogousColors1}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}" Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl ItemsSource="{Binding AnalogousColors2}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Triadic"></TextBlock>
+                <ItemsControl ItemsSource="{Binding TriadicColors1}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl ItemsSource="{Binding TriadicColors2}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Variant"></TextBlock>
+                <ItemsControl ItemsSource="{Binding VariantColors1}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <ItemsControl ItemsSource="{Binding VariantColors2}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Warning"></TextBlock>
+                <ItemsControl ItemsSource="{Binding WarningColors}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Error"></TextBlock>
+                <ItemsControl ItemsSource="{Binding ErrorColors}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
+                <TextBlock Text="Gray Scale"></TextBlock>
+                <ItemsControl ItemsSource="{Binding GrayScale}">
+                    <ItemsControl.ItemsPanel>
+                        <ItemsPanelTemplate>
+                            <StackPanel Orientation="Horizontal" />
+                        </ItemsPanelTemplate>
+                    </ItemsControl.ItemsPanel>
+
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border  Style="{StaticResource PaletteItemBorder}"  Background="{Binding Background}">
+                                <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
             </StackPanel>
         </DockPanel>
-        <StackPanel DockPanel.Dock="Left" Margin="0 0 8 0" >
-            <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
-                <Label Content="Color"></Label>
-                <TextBox Text="{Binding ColorCode.Value}" Margin="8 0 0 0" Width="96" MaxLength="6"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 8">
-                <Label Content="赤"></Label>
-                <Slider Maximum="255" Width="255" VerticalAlignment="Center" Margin="0 0 8 0" Value="{Binding RedValue.Value}">
-
-                </Slider>
-                <TextBox Text="{Binding RedValue.Value}" Width="32" VerticalAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 8">
-                <Label Content="緑"></Label>
-                <Slider Maximum="255" Width="255" VerticalAlignment="Center" Margin="0 0 8 0" Value="{Binding GreenValue.Value}">
-
-                </Slider>
-                <TextBox Text="{Binding GreenValue.Value}" Width="32" VerticalAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-            </StackPanel>
-            <StackPanel Orientation="Horizontal" VerticalAlignment="Center" Margin="0 0 0 8">
-                <Label Content="青"></Label>
-                <Slider Maximum="255" Width="255" VerticalAlignment="Center" Margin="0 0 8 0" Value="{Binding BlueValue.Value}">
-
-                </Slider>
-                <TextBox Text="{Binding BlueValue.Value}" Width="32" VerticalAlignment="Center" VerticalContentAlignment="Center"></TextBox>
-            </StackPanel>
-            <Grid>
-                <Border BorderThickness="1" BorderBrush="#888" Background="{Binding BaseColorBrush.Value}" Height="256">
-                    <TextBlock Text="{Binding BaseColorBrush.Value.Color}" Foreground="{Binding ForegroundBrush.Value}"></TextBlock>
-                </Border>
-            </Grid>
-        </StackPanel>
-        <StackPanel>
-            <TextBlock Text="Primary"></TextBlock>
-            <ItemsControl ItemsSource="{Binding PrimaryColors}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBlock Text="Complemental"></TextBlock>
-            <ItemsControl ItemsSource="{Binding ComplementalColors}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBlock Text="Analogous"></TextBlock>
-            <ItemsControl ItemsSource="{Binding AnalogousColors1}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl ItemsSource="{Binding AnalogousColors2}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBlock Text="Triadic"></TextBlock>
-            <ItemsControl ItemsSource="{Binding TriadicColors1}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl ItemsSource="{Binding TriadicColors2}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBlock Text="Variant"></TextBlock>
-            <ItemsControl ItemsSource="{Binding VariantColors1}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <ItemsControl ItemsSource="{Binding VariantColors2}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBlock Text="Warning"></TextBlock>
-            <ItemsControl ItemsSource="{Binding WarningColors}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBlock Text="Error"></TextBlock>
-            <ItemsControl ItemsSource="{Binding ErrorColors}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-            <TextBlock Text="Gray Scale"></TextBlock>
-            <ItemsControl ItemsSource="{Binding GrayScale}">
-                <ItemsControl.ItemsPanel>
-                    <ItemsPanelTemplate>
-                        <StackPanel Orientation="Horizontal" />
-                    </ItemsPanelTemplate>
-                </ItemsControl.ItemsPanel>
-
-                <ItemsControl.ItemTemplate>
-                    <DataTemplate>
-                        <Border Width="64" Height="24" Background="{Binding Background}">
-                            <TextBlock Text="{Binding Background}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
-                        </Border>
-                    </DataTemplate>
-                </ItemsControl.ItemTemplate>
-            </ItemsControl>
-        </StackPanel>
     </DockPanel>
 </UserControl>

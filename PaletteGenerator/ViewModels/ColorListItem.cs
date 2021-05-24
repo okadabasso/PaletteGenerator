@@ -14,14 +14,14 @@ namespace PaletteGenerator.ViewModels
         {
             get
             {
-                return FormatColor(Background.Color);
+                return "#" + FormatColor(Background.Color);
             }
         }
         public string ForegroundRgb
         {
             get
             {
-                return FormatColor(Foreground.Color);
+                return "#" + FormatColor(Foreground.Color);
             }
         }
         private string FormatColor(Color color)

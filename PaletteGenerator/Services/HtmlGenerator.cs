@@ -28,57 +28,57 @@ namespace PaletteGenerator.Services
         <table>
             <tr>
                 <td>primary</td>
-  {{ for color in primary_colors }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in primary_colors }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>complemental</td>
-  {{ for color in complemental_colors }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in complemental_colors }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>analogous -</td>
-  {{ for color in analogous_colors1 }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in analogous_colors1 }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>analogous +</td>
-  {{ for color in analogous_colors2 }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in analogous_colors2 }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>triadic -</td>
-  {{ for color in triadic_colors1 }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in triadic_colors1 }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>triadic +</td>
-  {{ for color in triadic_colors2 }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in triadic_colors2 }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>variant -</td>
-  {{ for color in variant_colors1 }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in variant_colors1 }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>variant +</td>
-  {{ for color in variant_colors2 }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in variant_colors2 }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>warning</td>
-  {{ for color in warning_colors }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in warning_colors }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>error</td>
-  {{ for color in error_colors }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in error_colors }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
             <tr>
                 <td>gray scale</td>
-  {{ for color in gray_scale }}<td style=""background-color:#{{ color.background_rgb }};color:#{{ color.foreground_rgb }};"">#{{ color.background_rgb }}</td>
+  {{ for color in gray_scale }}<td style=""background-color:{{ color.background_rgb }};color:{{ color.foreground_rgb }};"">{{ color.background_rgb }}</td>
   {{ end }}
             </tr>
         </table>

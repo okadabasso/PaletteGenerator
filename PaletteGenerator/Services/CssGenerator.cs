@@ -13,122 +13,122 @@ namespace PaletteGenerator.Services
 /* primary */
 {{ i = 0 }}
 {{ for color in primary_colors }}.bg-primary-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in primary_colors }}.text-primary-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* complemental */
 {{ i = 0 }}
 {{ for color in complemental_colors }}.bg-complemental-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in complemental_colors }}.text-complemental-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* analogous1 */
 {{ i = 0 }}
 {{ for color in analogous_colors1 }}.bg-analogous1-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in analogous_colors1 }}.text-analogous1-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* analogous2 */
 {{ i = 0 }}
 {{ for color in analogous_colors2 }}.bg-analogous2-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in analogous_colors2 }}.text-analogous2-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* triadic1 */
 {{ i = 0 }}
 {{ for color in triadic_colors1 }}.bg-triadic1-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in triadic_colors1 }}.text-triadic1-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* triadic2 */
 {{ i = 0 }}
 {{ for color in triadic_colors2 }}.bg-triadic2-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in triadic_colors2 }}.text-triadic2-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* variant1 */
 {{ i = 0 }}
 {{ for color in variant_colors1 }}.bg-variant1-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in variant_colors1 }}.text-variant1-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* variant2 */
 {{ i = 0 }}
 {{ for color in variant_colors2 }}.bg-variant2-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in variant_colors2 }}.text-variant2-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* warning */
 {{ i = 0 }}
 {{ for color in warning_colors }}.bg-warning-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in warning_colors }}.text-warning-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* errors */
 {{ i = 0 }}
 {{ for color in error_colors }}.bg-error-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in error_colors }}.text-error-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 /* gray scale */
 {{ i = 0 }}
 {{ for color in gray_scale }}.bg-gray-{{ i }} {
-    background-color:#{{ color.background_rgb }};
+    background-color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 {{ i = 0 }}
 {{ for color in gray_scale }}.text-gray-{{ i }} {
-    color:#{{ color.background_rgb }};
+    color:{{ color.background_rgb }};
 }
 {{ i = i + 1 }}{{ end }}
 ";

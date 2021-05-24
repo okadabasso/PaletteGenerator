@@ -15,47 +15,47 @@ namespace PaletteGenerator.Services
                    >
 <!-- primary -->
 {{ i = 0 }}
-{{ for color in primary_colors }}   <Color x:Key=""ColorPrimary_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in primary_colors }}   <Color x:Key=""ColorPrimary_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- complemental -->
 {{ i = 0 }}
-{{ for color in complemental_colors }}   <Color x:Key=""ColorComplemental_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in complemental_colors }}   <Color x:Key=""ColorComplemental_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- analogous 1 -->
 {{ i = 0 }}
-{{ for color in analogous_colors1 }}   <Color x:Key=""ColorAnalogous1_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in analogous_colors1 }}   <Color x:Key=""ColorAnalogous1_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- analogous 2 -->
 {{ i = 0 }}
-{{ for color in analogous_colors2 }}   <Color x:Key=""ColorAnalogous2_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in analogous_colors2 }}   <Color x:Key=""ColorAnalogous2_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- triadic 1 -->
 {{ i = 0 }}
-{{ for color in triadic_colors1 }}   <Color x:Key=""ColorTriadic1_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in triadic_colors1 }}   <Color x:Key=""ColorTriadic1_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- triadic 2 -->
 {{ i = 0 }}
-{{ for color in triadic_colors2 }}   <Color x:Key=""ColorTriadic2_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in triadic_colors2 }}   <Color x:Key=""ColorTriadic2_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- variant 1 -->
 {{ i = 0 }}
-{{ for color in variant_colors1 }}   <Color x:Key=""ColorVariant1_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in variant_colors1 }}   <Color x:Key=""ColorVariant1_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- variant 2 -->
 {{ i = 0 }}
-{{ for color in variant_colors2 }}   <Color x:Key=""ColorVariant2_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in variant_colors2 }}   <Color x:Key=""ColorVariant2_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- warning -->
 {{ i = 0 }}
-{{ for color in warning_colors }}   <Color x:Key=""ColorWarning_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in warning_colors }}   <Color x:Key=""ColorWarning_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- error -->
 {{ i = 0 }}
-{{ for color in error_colors }}   <Color x:Key=""ColorError_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in error_colors }}   <Color x:Key=""ColorError_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 <!-- gray scale -->
 {{ i = 0 }}
-{{ for color in gray_scale }}   <Color x:Key=""ColorGray_{{ i }}"" >#{{ color.background_rgb }}</Color>
+{{ for color in gray_scale }}   <Color x:Key=""ColorGray_{{ i }}"" >{{ color.background_rgb }}</Color>
 {{ i = i + 1 }}{{ end }}
 </ResourceDictionary>
 ";

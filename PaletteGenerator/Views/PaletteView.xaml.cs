@@ -11,5 +11,10 @@ namespace PaletteGenerator.Views
         {
             InitializeComponent();
         }
+
+        private void StackPanel_MouseDown(object sender, System.Windows.Input.MouseButtonEventArgs e)
+        {
+
+        }
     }
 }

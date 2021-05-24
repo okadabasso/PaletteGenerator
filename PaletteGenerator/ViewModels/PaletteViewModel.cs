@@ -24,13 +24,11 @@ namespace PaletteGenerator.ViewModels
         public ReactiveCommand ToWpfResourceCommand { get; set; } = new ReactiveCommand();
         public ReactiveCommand ToCssCommand { get; set; } = new ReactiveCommand();
         public ReactiveCommand ToHtmlCommand { get; set; } = new ReactiveCommand();
-        public ReactiveCommand<string> PanelClick { get; set; } = new ReactiveCommand<string>();
         public ReactiveProperty<string> Message { get; set; } = new ReactiveProperty<string>();
         public ReactiveProperty<string> ColorCode { get; set; } = new ReactiveProperty<string>();
         public ReactiveProperty<byte> RedValue { get; set; } = new ReactiveProperty<byte>();
         public ReactiveProperty<byte> GreenValue { get; set; } = new ReactiveProperty<byte>();
         public ReactiveProperty<byte> BlueValue { get; set; } = new ReactiveProperty<byte>();
-        public ReactiveProperty<string> AreaName { get; set; } = new ReactiveProperty<string>();
         public ReactiveProperty<SolidColorBrush> ForegroundBrush { get; set; } = new ReactiveProperty<SolidColorBrush>();
         public ReactiveProperty<SolidColorBrush> BaseColorBrush { get; set; }
         public ObservableCollection<ColorListItem> PrimaryColors { get; set; } = new ObservableCollection<ColorListItem>();
@@ -44,9 +42,14 @@ namespace PaletteGenerator.ViewModels
         public ObservableCollection<ColorListItem> WarningColors { get; set; } = new ObservableCollection<ColorListItem>();
         public ObservableCollection<ColorListItem> ErrorColors { get; set; } = new ObservableCollection<ColorListItem>();
         public ObservableCollection<ColorListItem> GrayScale { get; set; } = new ObservableCollection<ColorListItem>();
-        public PaletteViewModel(IContainer container)
+
+
+        public ReactiveCommand<SolidColorBrush> SelectColorCommand { get; set; } = new ReactiveCommand<SolidColorBrush>();
+        public SampleTextViewModel SampleTextViewModel { get; set; }
+        public PaletteViewModel(IContainer container, SampleTextViewModel sampleTextViewModel)
         {
             _container = container;
+            SampleTextViewModel = sampleTextViewModel;
             BaseColorBrush = Observable.CombineLatest(
                 RedValue,
                 GreenValue,
@@ -140,7 +143,9 @@ namespace PaletteGenerator.ViewModels
                 }
             });
 
-            PanelClick.Subscribe(areaName => { AreaName.Value = areaName; });
+            SelectColorCommand.Subscribe(brush => {
+                SampleTextViewModel.SelectColorCommand.Execute(brush);
+            });
         }
         private void CreatePalette(SolidColorBrush baseColorBrush)
         {

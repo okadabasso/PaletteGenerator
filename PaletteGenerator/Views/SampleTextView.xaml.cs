@@ -3,11 +3,11 @@
 namespace PaletteGenerator.Views
 {
     /// <summary>
-    /// Interaction logic for PaletteView
+    /// Interaction logic for SampleTextView
     /// </summary>
-    public partial class PaletteView : UserControl
+    public partial class SampleTextView : UserControl
     {
-        public PaletteView()
+        public SampleTextView()
         {
             InitializeComponent();
         }

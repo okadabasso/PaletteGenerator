@@ -164,8 +164,8 @@ namespace PaletteGenerator.ViewModels
             var warning = new HslColor(30, (baseHsl.S + 1) / 2, (baseHsl.L + 1) / 2);
             WarningColors = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(warning), 0f));
 
-            var error = new HslColor(0, (baseHsl.S + 1) / 2, (baseHsl.L + 1) / 2);
-            ErrorColors = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(error), 0f));
+            var error = Color.FromRgb(255, 32,0);
+            ErrorColors = new ObservableCollection<ColorListItem>(CreateColorList(error, 0f));
 
             var gray = new HslColor(baseHsl.H, (float)(baseHsl.S * 0.10f), baseHsl.L);
 
@@ -192,21 +192,47 @@ namespace PaletteGenerator.ViewModels
             var hsl = new HslColor(h, baseHsl.S, baseHsl.L);
             var list = new List<ColorListItem>();
 
+
             var ratio = (0.95f - 0.15) / 9.0f;
             for (var i = 0; i < 10; i++)
             {
                 var l = 0.15 + i * ratio;
                 if (l < 0) l = 0;
                 if (l > 1) l = 1;
-                var color = new SolidColorBrush(HslColor.ToRgb(new HslColor(hsl.H, hsl.S, (float)l)));
-                color.Freeze();
 
-                var foreground = l < 0.55 ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
-                list.Add(new ColorListItem { Background = color, Foreground = foreground });
+                var color = HslColor.ToRgb(new HslColor(hsl.H, hsl.S, (float)l));
+                var brush = new SolidColorBrush(HslColor.ToRgb(new HslColor(hsl.H, hsl.S, (float)l)));
+                brush.Freeze();
+
+                // コントラスト比計算
+                var contrast1 = Contrast(Color.FromRgb(1,1,1), color);
+                var contrast2 = Contrast(Colors.White, color);
+
+
+                var foreground = contrast1 < contrast2 ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
+                list.Add(new ColorListItem { Background = brush, Foreground = foreground });
             }
 
 
             return list;
+        }
+        private double Contrast(Color color1, Color color2)
+        {
+            var l1 = Luminance(color1);
+            var l2 = Luminance(color2);
+            return l1 > l2 ? (l1 + 0.05) / (l2 + 0.05) : (l2 + 0.05) / (l1 + 0.05);
+        }
+        private double Luminance(Color color)
+        {
+            Func<double, double> linear = v => (v / 255) < 0.003928  ? (v / 255) / 12.92 : Math.Pow((((v / 255) + 0.055) / 1.055), 2.4F);
+
+            var luminanceR = linear((double)color.R);
+            var luminanceG = linear((double)color.G);
+            var luminanceB = linear((double)color.B);
+
+            var l = 0.2126 * luminanceR + 0.7152 * luminanceG + 0.0722 * luminanceB;
+            return l;
+
         }
         private void ShowFlash(string message)
         {

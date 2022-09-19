@@ -9,63 +9,27 @@
                 <MouseBinding Command="{Binding PanelClick}" CommandParameter="Background" MouseAction="LeftClick"></MouseBinding>
             </Border.InputBindings>
             <StackPanel>
-                <Border BorderBrush="{Binding PrimaryBorder.Value}" BorderThickness="1" Margin="0 0 0 8">
-                    <StackPanel>
-                        <StackPanel.InputBindings>
-                            <MouseBinding Command="{Binding PanelClick}" CommandParameter="Primary" MouseAction="LeftClick"></MouseBinding>
-                        </StackPanel.InputBindings>
-                        <TextBlock Text="Primary" Foreground="{Binding PrimaryTextBrush.Value}"></TextBlock>
-                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="{Binding PrimaryTextBrush.Value}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
-                    </StackPanel>
-                </Border>
-                <Border BorderBrush="{Binding SecondaryBorder.Value}" BorderThickness="1" Margin="0 0 0 8">
-                    <StackPanel>
-                        <StackPanel.InputBindings>
-                            <MouseBinding Command="{Binding PanelClick}" CommandParameter="Secondary" MouseAction="LeftClick"></MouseBinding>
-                        </StackPanel.InputBindings>
-                        <TextBlock Text="Secondary" Foreground="{Binding SecondaryTextBrush.Value}"></TextBlock>
-                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="{Binding SecondaryTextBrush.Value}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
-                    </StackPanel>
-                </Border>
-                <Border BorderBrush="{Binding InfoBorder.Value}" BorderThickness="1" Margin="0 0 0 8">
-                    <StackPanel>
-                        <StackPanel.InputBindings>
-                            <MouseBinding Command="{Binding PanelClick}" CommandParameter="Info" MouseAction="LeftClick"></MouseBinding>
-                        </StackPanel.InputBindings>
-                        <TextBlock Text="Info" Foreground="{Binding InfoTextBrush.Value}"></TextBlock>
-                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="{Binding InfoTextBrush.Value}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
-                    </StackPanel>
-                </Border>
-                <Border BorderBrush="{Binding SuccessBorder.Value}" BorderThickness="1" Margin="0 0 0 8">
-                    <StackPanel>
-                        <StackPanel.InputBindings>
-                            <MouseBinding Command="{Binding PanelClick}" CommandParameter="Success" MouseAction="LeftClick"></MouseBinding>
-                        </StackPanel.InputBindings>
-                        <TextBlock Text="Success" Foreground="{Binding SuccessTextBrush.Value}"></TextBlock>
-                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="{Binding SuccessTextBrush.Value}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
-                    </StackPanel>
-                </Border>
-                <Border BorderBrush="{Binding WarningBorder.Value}" BorderThickness="1" Margin="0 0 0 8">
-                    <StackPanel>
-                        <StackPanel.InputBindings>
-                            <MouseBinding Command="{Binding PanelClick}" CommandParameter="Warning" MouseAction="LeftClick"></MouseBinding>
-                        </StackPanel.InputBindings>
-                        <TextBlock Text="Warning" Foreground="{Binding WarningTextBrush.Value}"></TextBlock>
-                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="{Binding WarningTextBrush.Value}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
-                    </StackPanel>
-                </Border>
-                <Border BorderBrush="{Binding DangerBorder.Value}" BorderThickness="1" Margin="0 0 0 0">
-                    <StackPanel>
-                        <StackPanel.InputBindings>
-                            <MouseBinding Command="{Binding PanelClick}" CommandParameter="Danger" MouseAction="LeftClick"></MouseBinding>
-                        </StackPanel.InputBindings>
-                        <TextBlock Text="Danger" Foreground="{Binding DangerTextBrush.Value}"></TextBlock>
-                        <TextBlock TextWrapping="WrapWithOverflow" Foreground="{Binding DangerTextBrush.Value}">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam, quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non proident, sunt in culpa qui officia deserunt mollit anim id est laborum.</TextBlock>
-                    </StackPanel>
-                </Border>
+                <ItemsControl ItemsSource="{Binding SampleTextItems}">
+                    <ItemsControl.ItemTemplate>
+                        <DataTemplate>
+                            <Border BorderBrush="{Binding BorderBrush.Value}" BorderThickness="1" Background="{Binding BackgroundBrush.Value}" Margin="0 0 0 8">
+                                <StackPanel>
+                                    <StackPanel.InputBindings>
+                                        <MouseBinding Command="{Binding Path=DataContext.PanelClick, RelativeSource={RelativeSource FindAncestor,AncestorType={x:Type UserControl}} }" CommandParameter="{Binding Title.Value}" MouseAction="LeftClick"></MouseBinding>
+                                    </StackPanel.InputBindings>
+                                    <StackPanel Orientation="Horizontal">
+                                        <TextBlock Text="{Binding Title.Value}" Foreground="{Binding ForegroundBrush.Value}"></TextBlock>
+
+                                        <TextBlock Text="{Binding Contrast.Value, StringFormat=0.00}" Foreground="{Binding ForegroundBrush.Value}" Margin="8,0,0,0"></TextBlock>
+                                    </StackPanel>
+                                    <TextBlock Text="{Binding Content.Value}" TextWrapping="WrapWithOverflow" Foreground="{Binding ForegroundBrush.Value}"></TextBlock>
+                                </StackPanel>
+                            </Border>
+                        </DataTemplate>
+                    </ItemsControl.ItemTemplate>
+                </ItemsControl>
 
             </StackPanel>
         </Border>
-        <TextBlock Text="{Binding AreaName.Value}"></TextBlock>
     </StackPanel>
 </UserControl>

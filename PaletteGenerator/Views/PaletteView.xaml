@@ -3,7 +3,8 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2006/xaml"
              xmlns:prism="http://prismlibrary.com/"      
              xmlns:local="clr-namespace:PaletteGenerator.Views"
-             prism:ViewModelLocator.AutoWireViewModel="True">
+             prism:ViewModelLocator.AutoWireViewModel="True"
+             Background="White">
     <UserControl.Resources>
         <Style TargetType="{x:Type Control}">
             <Setter Property="FontSize" Value="14"></Setter>
@@ -69,6 +70,25 @@
                     </StackPanel>
                 </StackPanel>
             </DockPanel>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0, 16, 0, 0" VerticalAlignment="Center">
+                <Label Content="Target" VerticalContentAlignment="Center"></Label>
+                <RadioButton Content="Foreground" IsChecked="{Binding TargetFieldForeground.Value}" GroupName="TargetField" VerticalAlignment="Center" Margin="16,1,0,0"></RadioButton>
+                <RadioButton Content="Background" IsChecked="{Binding TargetFieldBackground.Value}" GroupName="TargetField" VerticalAlignment="Center" Margin="8,1,0,0"></RadioButton>
+            </StackPanel>
+            <StackPanel DockPanel.Dock="Bottom" Orientation="Horizontal" Margin="0, 16, 0, 0" VerticalAlignment="Center">
+                <Border  Style="{StaticResource PaletteItemBorder}" BorderBrush="Black" BorderThickness="1" Background="White" Margin="0">
+                    <Border.InputBindings>
+                        <MouseBinding Command="{Binding SelectColorCommand}" CommandParameter="{Binding WhiteBrush.Value}" MouseAction="LeftClick"></MouseBinding>
+                    </Border.InputBindings>
+                    <TextBlock Text="White" Foreground="DarkSlateGray" Style="{StaticResource PaletteItem}"></TextBlock>
+                </Border>
+                <Border  Style="{StaticResource PaletteItemBorder}"  Background="Black">
+                    <Border.InputBindings>
+                        <MouseBinding Command="{Binding SelectColorCommand}" CommandParameter="{Binding BlackBrush.Value}" MouseAction="LeftClick"></MouseBinding>
+                    </Border.InputBindings>
+                    <TextBlock Text="Black" Foreground="White" Style="{StaticResource PaletteItem}"></TextBlock>
+                </Border>
+            </StackPanel>
             <DockPanel DockPanel.Dock="Top" Margin="0 0 0 0" >
                 <StackPanel Orientation="Vertical" >
                     <StackPanel Orientation="Horizontal" Margin="0 0 0 8">
@@ -153,12 +173,13 @@
 
                     <ItemsControl.ItemTemplate>
                         <DataTemplate>
-                            <Border  Style="{StaticResource PaletteItemBorder}" Background="{Binding Background}">
+                            <Border  Style="{StaticResource PaletteItemBorder}" Background="{Binding Background}" >
                                 <Border.InputBindings>
                                     <MouseBinding Command="{Binding Path=DataContext.SelectColorCommand,RelativeSource={RelativeSource FindAncestor, AncestorType={x:Type UserControl}}}" CommandParameter="{Binding Background}" MouseAction="LeftClick"></MouseBinding>
                                 </Border.InputBindings>
                                 <TextBlock Text="{Binding BackgroundRgb}" Foreground="{Binding Foreground}" Style="{StaticResource PaletteItem}"></TextBlock>
                             </Border>
+                            
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
@@ -311,6 +332,7 @@
                         </DataTemplate>
                     </ItemsControl.ItemTemplate>
                 </ItemsControl>
+                
             </StackPanel>
         </DockPanel>
         <Grid Margin="8 0 0 0 ">

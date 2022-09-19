@@ -46,6 +46,12 @@ namespace PaletteGenerator.ViewModels
 
         public ReactiveCommand<SolidColorBrush> SelectColorCommand { get; set; } = new ReactiveCommand<SolidColorBrush>();
         public SampleTextViewModel SampleTextViewModel { get; set; }
+        public ReactiveProperty<bool> TargetFieldForeground { get; set;  } = new ReactiveProperty<bool>(true);
+        public ReactiveProperty<bool> TargetFieldBackground { get; set; } = new ReactiveProperty<bool>(false);
+
+        public ReactiveProperty<SolidColorBrush> WhiteBrush { get; set; } = new ReactiveProperty<SolidColorBrush>(new SolidColorBrush(Colors.White));
+        public ReactiveProperty<SolidColorBrush> BlackBrush{ get; set; } = new ReactiveProperty<SolidColorBrush>(new SolidColorBrush(Colors.Black));
+
         public PaletteViewModel(IContainer container, SampleTextViewModel sampleTextViewModel)
         {
             _container = container;
@@ -144,6 +150,7 @@ namespace PaletteGenerator.ViewModels
             });
 
             SelectColorCommand.Subscribe(brush => {
+                sampleTextViewModel.SetTargetField(TargetFieldForeground.Value ? SampleTextViewModel.TargetField.Forground : SampleTextViewModel.TargetField.Background);
                 SampleTextViewModel.SelectColorCommand.Execute(brush);
             });
         }
@@ -164,8 +171,8 @@ namespace PaletteGenerator.ViewModels
             var warning = new HslColor(30, (baseHsl.S + 1) / 2, (baseHsl.L + 1) / 2);
             WarningColors = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(warning), 0f));
 
-            var error = Color.FromRgb(255, 32,0);
-            ErrorColors = new ObservableCollection<ColorListItem>(CreateColorList(error, 0f));
+            var error = new HslColor(5, (baseHsl.S + 1) / 2, (baseHsl.L + 1) / 2);
+            ErrorColors = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(error), 0f));
 
             var gray = new HslColor(baseHsl.H, (float)(baseHsl.S * 0.10f), baseHsl.L);
 
@@ -205,8 +212,8 @@ namespace PaletteGenerator.ViewModels
                 brush.Freeze();
 
                 // コントラスト比計算
-                var contrast1 = Contrast(Color.FromRgb(1,1,1), color);
-                var contrast2 = Contrast(Colors.White, color);
+                var contrast1 = ColorFunctions.Contrast(Color.FromRgb(1,1,1), color);
+                var contrast2 = ColorFunctions.Contrast(Colors.White, color);
 
 
                 var foreground = contrast1 < contrast2 ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
@@ -215,24 +222,6 @@ namespace PaletteGenerator.ViewModels
 
 
             return list;
-        }
-        private double Contrast(Color color1, Color color2)
-        {
-            var l1 = Luminance(color1);
-            var l2 = Luminance(color2);
-            return l1 > l2 ? (l1 + 0.05) / (l2 + 0.05) : (l2 + 0.05) / (l1 + 0.05);
-        }
-        private double Luminance(Color color)
-        {
-            Func<double, double> linear = v => (v / 255) < 0.003928  ? (v / 255) / 12.92 : Math.Pow((((v / 255) + 0.055) / 1.055), 2.4F);
-
-            var luminanceR = linear((double)color.R);
-            var luminanceG = linear((double)color.G);
-            var luminanceB = linear((double)color.B);
-
-            var l = 0.2126 * luminanceR + 0.7152 * luminanceG + 0.0722 * luminanceB;
-            return l;
-
         }
         private void ShowFlash(string message)
         {

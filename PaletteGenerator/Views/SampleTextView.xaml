@@ -5,9 +5,6 @@
              prism:ViewModelLocator.AutoWireViewModel="True">
     <StackPanel Width="Auto">
         <Border Padding="8" Background="{Binding BackgroundBrush.Value}">
-            <Border.InputBindings>
-                <MouseBinding Command="{Binding PanelClick}" CommandParameter="Background" MouseAction="LeftClick"></MouseBinding>
-            </Border.InputBindings>
             <StackPanel>
                 <ItemsControl ItemsSource="{Binding SampleTextItems}">
                     <ItemsControl.ItemTemplate>

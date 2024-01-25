@@ -15,7 +15,7 @@ namespace PaletteGenerator.ViewModels
     public class SampleTextViewModel : BindableBase
     {
         public ReactiveCommand<string> PanelClick { get; set; } = new ReactiveCommand<string>();
-        private  ContentCategory _activeArea { get; set; } = ContentCategory.None;
+        private ContentCategory _activeArea { get; set; } = ContentCategory.Primary;
 
         public ObservableCollection<SampleTextItem> SampleTextItems { get; set; }
         public ReactiveProperty<Brush> PrimaryBorder { get; set; } = new ReactiveProperty<Brush>();
@@ -33,7 +33,7 @@ namespace PaletteGenerator.ViewModels
         public ReactiveProperty<SolidColorBrush> DangerTextBrush { get; set; } = new ReactiveProperty<SolidColorBrush>(new SolidColorBrush(Colors.DarkSlateGray));
         public ReactiveProperty<SolidColorBrush> BackgroundBrush { get; set; } = new ReactiveProperty<SolidColorBrush>(new SolidColorBrush(Colors.DarkSlateGray));
 
-        private ReactiveProperty<Brush> activeBrush;
+        private ReactiveProperty<Brush> activeBrush = new ReactiveProperty<Brush>();
 
         private TargetField _targetField { get; set; }
         private bool _targetFieldBackground { get; set; }
@@ -61,7 +61,7 @@ namespace PaletteGenerator.ViewModels
         public ReactiveCommand<SolidColorBrush> SelectColorCommand { get; set; } = new ReactiveCommand<SolidColorBrush>();
         public SampleTextViewModel()
         {
-            PanelClick.Subscribe(areaName => { SelectArea(areaName); });
+            PanelClick.Subscribe(areaName => { SelectBlock(areaName); });
 
             PrimaryBorder.Value = CreateTransparentBorder();
             SecondaryBorder.Value = CreateTransparentBorder();
@@ -108,7 +108,7 @@ namespace PaletteGenerator.ViewModels
 
             return brush;
         }
-        private void SelectArea(string areaName)
+        private void SelectBlock(string areaName)
         {
             if(_activeArea != ContentCategory.None)
             {
@@ -125,7 +125,6 @@ namespace PaletteGenerator.ViewModels
             _activeArea = area;;
             RaisePropertyChanged(null);
         }
-
 
         private void SelectColor(SolidColorBrush brush)
         {

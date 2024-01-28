@@ -202,13 +202,15 @@ namespace PaletteGenerator.ViewModels
             var list = new List<ColorListItem>();
 
 
-            for (int step = 0; step <= 10; step++)
+            for (int step = 0; step < 10; step++)
             {
-                double lightness = Math.Pow( (double)step / 10, 1/1.4);  // L: 0% to 100%
+                // double lightness = Math.Pow((double)step / 10, 1/1.2);  // L: 0% to 100%
+                double lightness = Math.Pow((double)step / 9, 1 / 1.07) * 0.97;
+                double satulation = hsl.S * 0.87;
                 Console.WriteLine(lightness);
                 if(lightness < 0) lightness = lightness = 0;
                 if(lightness > 1) lightness = lightness = 1;
-                Color color = HslColor.ToRgb( new HslColor(hsl.H, hsl.S * 0.9F, (float)lightness));
+                Color color = HslColor.ToRgb( new HslColor(hsl.H, (float)satulation, (float)lightness));
                 var brush = new SolidColorBrush(color);
                 brush.Freeze();
 

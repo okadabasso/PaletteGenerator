@@ -157,14 +157,16 @@ namespace PaletteGenerator.ViewModels
         private void CreatePalette(SolidColorBrush baseColorBrush)
         {
             Color c = baseColorBrush.Color;
-            PrimaryColors = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, 0f));
-            ComplementalColors = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, 180f));
-            AnalogousColors1 = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, -30f));
-            AnalogousColors2 = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, 30f));
-            TriadicColors1 = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, -120f));
-            TriadicColors2 = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, 120f));
-            VariantColors1 = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, -60f));
-            VariantColors2 = new ObservableCollection<ColorListItem>(CreateColorList(baseColorBrush.Color, 60f));
+            var hsl = HslColor.FromRgb(c);
+            var baseColor = HslColor.ToRgb(new HslColor(hsl.H, 1, 0.75F));
+            PrimaryColors = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, 0f));
+            ComplementalColors = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, 180f));
+            AnalogousColors1 = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, -30f));
+            AnalogousColors2 = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, 30f));
+            TriadicColors1 = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, -120f));
+            TriadicColors2 = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, 120f));
+            VariantColors1 = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, -60f));
+            VariantColors2 = new ObservableCollection<ColorListItem>(CreateColorList(baseColor, 60f));
 
             // 原色ではなく彩度をベースカラーにあわせる
             var baseHsl = HslColor.FromRgb(c);
@@ -174,7 +176,7 @@ namespace PaletteGenerator.ViewModels
             var error = new HslColor(5, (baseHsl.S + 1) / 2, (baseHsl.L + 1) / 2);
             ErrorColors = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(error), 0f));
 
-            var gray = new HslColor(baseHsl.H, (float)(baseHsl.S * 0.10f), baseHsl.L);
+            var gray = new HslColor(baseHsl.H, 0F, 0F);
 
             GrayScale = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(gray), 0f));
 
@@ -200,19 +202,20 @@ namespace PaletteGenerator.ViewModels
             var list = new List<ColorListItem>();
 
 
-            var ratio = (0.95f - 0.15) / 9.0f;
-            for (var i = 0; i < 10; i++)
+            for (int step = 0; step < 10; step++)
             {
-                var l = 0.15 + i * ratio;
-                if (l < 0) l = 0;
-                if (l > 1) l = 1;
-
-                var color = HslColor.ToRgb(new HslColor(hsl.H, hsl.S, (float)l));
-                var brush = new SolidColorBrush(HslColor.ToRgb(new HslColor(hsl.H, hsl.S, (float)l)));
+                // double lightness = Math.Pow((double)step / 10, 1/1.2);  // L: 0% to 100%
+                double lightness = Math.Pow((double)step / 9, 1 / 1.07) * 0.97;
+                double satulation = hsl.S * 0.87;
+                Console.WriteLine(lightness);
+                if(lightness < 0) lightness = lightness = 0;
+                if(lightness > 1) lightness = lightness = 1;
+                Color color = HslColor.ToRgb( new HslColor(hsl.H, (float)satulation, (float)lightness));
+                var brush = new SolidColorBrush(color);
                 brush.Freeze();
 
                 // コントラスト比計算
-                var contrast1 = ColorFunctions.Contrast(Color.FromRgb(1,1,1), color);
+                var contrast1 = ColorFunctions.Contrast(Color.FromRgb(0, 0, 0), color);
                 var contrast2 = ColorFunctions.Contrast(Colors.White, color);
 
 
@@ -234,6 +237,56 @@ namespace PaletteGenerator.ViewModels
                 RaisePropertyChanged(nameof(Message));
 
             });   
+        }
+        static Color HSLToRGB(double hue, double saturation, double lightness)
+        {
+            double c = (1 - Math.Abs(2 * lightness - 1)) * saturation;
+            double x = c * (1 - Math.Abs((hue * 6) % 2 - 1));
+            double m = lightness - c / 2;
+
+            double r, g, b;
+            if (hue < 1.0 / 6.0)
+            {
+                r = c;
+                g = x;
+                b = 0;
+            }
+            else if (hue < 2.0 / 6.0)
+            {
+                r = x;
+                g = c;
+                b = 0;
+            }
+            else if (hue < 3.0 / 6.0)
+            {
+                r = 0;
+                g = c;
+                b = x;
+            }
+            else if (hue < 4.0 / 6.0)
+            {
+                r = 0;
+                g = x;
+                b = c;
+            }
+            else if (hue < 5.0 / 6.0)
+            {
+                r = x;
+                g = 0;
+                b = c;
+            }
+            else
+            {
+                r = c;
+                g = 0;
+                b = x;
+            }
+
+            return Color.FromRgb(
+                (byte)((r + m) * 255),
+                (byte)((g + m) * 255),
+                (byte)((b + m) * 255)
+            );
         }
         private void ClearFlash()
         {

@@ -1,15 +1,15 @@
-﻿<Project Sdk="Microsoft.NET.Sdk.WindowsDesktop">
+﻿<Project Sdk="Microsoft.NET.Sdk">
   <PropertyGroup>
-    <OutputType>WinExe</OutputType>
-    <TargetFramework>netcoreapp3.1</TargetFramework>
+    <OutputType>Exe</OutputType>
+    <TargetFramework>net8.0-windows</TargetFramework>
     <UseWPF>true</UseWPF>
     <AssemblyName>PaletteGenerator</AssemblyName>
   </PropertyGroup>
   <ItemGroup>
-    <PackageReference Include="NLog.Extensions.Logging" Version="1.7.2" />
-    <PackageReference Include="Prism.DryIoc" Version="8.0.0.1909" />
-    <PackageReference Include="ReactiveProperty" Version="7.10.0" />
-    <PackageReference Include="Scriban" Version="3.7.0" />
+    <PackageReference Include="NLog.Extensions.Logging" Version="5.3.8" />
+    <PackageReference Include="Prism.DryIoc" Version="8.1.97" />
+    <PackageReference Include="ReactiveProperty" Version="9.3.4" />
+    <PackageReference Include="Scriban" Version="5.9.1" />
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Assets\" />

@@ -170,15 +170,15 @@ namespace PaletteGenerator.ViewModels
 
             // 原色ではなく彩度をベースカラーにあわせる
             var baseHsl = HslColor.FromRgb(c);
-            var warning = new HslColor(30, (baseHsl.S + 1) / 2, (baseHsl.L + 1) / 2);
+            var warning = new HslColor(30, 0.75F, 0.5F);
             WarningColors = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(warning), 0f));
 
-            var error = new HslColor(5, (baseHsl.S + 1) / 2, (baseHsl.L + 1) / 2);
+            var error = new HslColor(5, 1F, 0.75F);
             ErrorColors = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(error), 0f));
 
             var gray = new HslColor(baseHsl.H, 0F, 0F);
 
-            GrayScale = new ObservableCollection<ColorListItem>(CreateColorList(HslColor.ToRgb(gray), 0f));
+            GrayScale = new ObservableCollection<ColorListItem>(CreateGrayScale(HslColor.ToRgb(gray), 0f));
 
             RaisePropertyChanged(nameof(PrimaryColors));
             RaisePropertyChanged(nameof(ComplementalColors));
@@ -201,21 +201,15 @@ namespace PaletteGenerator.ViewModels
             var hsl = new HslColor(h, baseHsl.S, baseHsl.L);
             var list = new List<ColorListItem>();
 
-
-            for (int step = 0; step < 10; step++)
+            var steps = new int[] { 100, 200, 300, 400, 500, 600, 700, 800, 900 };
+            for (int step = 0; step < steps.Length; step++)
             {
-                // double lightness = Math.Pow((double)step / 10, 1/1.2);  // L: 0% to 100%
-                double lightness = Math.Pow((double)step / 9, 1 / 1.07) * 0.97;
-                double satulation = hsl.S * 0.87;
-                Console.WriteLine(lightness);
-                if(lightness < 0) lightness = lightness = 0;
-                if(lightness > 1) lightness = lightness = 1;
-                Color color = HslColor.ToRgb( new HslColor(hsl.H, (float)satulation, (float)lightness));
+                var color = HslColor.ToRgb(GetRedShade(h, steps[step]));
                 var brush = new SolidColorBrush(color);
                 brush.Freeze();
 
                 // コントラスト比計算
-                var contrast1 = ColorFunctions.Contrast(Color.FromRgb(0, 0, 0), color);
+                var contrast1 = ColorFunctions.Contrast(Colors.Black, color);
                 var contrast2 = ColorFunctions.Contrast(Colors.White, color);
 
 
@@ -225,6 +219,59 @@ namespace PaletteGenerator.ViewModels
 
 
             return list;
+        }
+        private List<ColorListItem> CreateGrayScale(Color baseColor, float offset)
+        {
+            var baseHsl = HslColor.FromRgb(baseColor);
+            var h = baseHsl.H + offset;
+            if (h < 0) h += 360;
+            if (h >= 360) h -= 360;
+            var hsl = new HslColor(h, baseHsl.S, baseHsl.L);
+            var list = new List<ColorListItem>();
+
+            var steps = new int[] { 100, 200, 300, 400, 500, 600, 700, 800, 900 };
+            for (int step = 0; step < steps.Length; step++)
+            {
+                var lightness = 95F - (95F - 15F) * Math.Pow((double)steps[step] / 900, 0.75);
+                var color = HslColor.ToRgb(new HslColor(0, 0, (float)lightness /100));
+                var brush = new SolidColorBrush(color);
+                brush.Freeze();
+
+                // コントラスト比計算
+                var contrast1 = ColorFunctions.Contrast(Colors.Black, color);
+                var contrast2 = ColorFunctions.Contrast(Colors.White, color);
+
+
+                var foreground = contrast1 < contrast2 ? new SolidColorBrush(Colors.White) : new SolidColorBrush(Colors.Black);
+                list.Add(new ColorListItem { Background = brush, Foreground = foreground });
+            }
+
+
+            return list;
+        }
+        HslColor GetRedShade(float hue, int step)
+        {
+            double minL = ComputeLightnessScale(hue, 30, 15);  // L の最小値（900の暗さ）
+            double maxL = 97;  // L の最大値（100の明るさ）
+            
+            // 3/4, 1/1.2, 1/1.07 で試す
+            double lightness = maxL - (maxL - minL) * Math.Pow((double)step / 900, 1/1.2);
+
+            double minS = 50; // 最小彩度（暗い色ほど低彩度）
+            double maxS = 97; // 最大彩度（明るい色ほど高彩度）
+
+            double saturation = maxS - (maxS - minS) * Math.Pow((double)step / 900, 1.2);
+
+            return new HslColor(hue, (float)saturation / 100, (float)lightness / 100);
+        }
+        static double ComputeLightnessScale(float x, float middle, float magnitude)
+        {
+            float A = middle;  // 中央の高さ
+            float B = magnitude;  // 振幅（最大値と最小値の差の半分）
+            float C = 150;  // 波の中心（(60+240)/2）
+            double D = 90;   // スケーリング（変化のなだらかさ調整）
+
+            return A + B * Math.Cos(Math.PI * (x - C) / D);
         }
         private void ShowFlash(string message)
         {

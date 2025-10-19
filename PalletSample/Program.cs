@@ -5,5 +5,5 @@ using PalletSample;
 //var parser = new ParseColors();
 //parser.Execute();
 
-var sample = new CreatePalletSample();
+var sample = new CreateStyleResource();
 sample.Create();

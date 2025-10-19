@@ -1,0 +1,211 @@
+<html>
+<head>
+    <title>Sample Pallet Application</title>
+    <link rel="stylesheet" type="text/css" href="styles.css">
+    <style>
+        html,body{
+            font-family: Arial, sans-serif;
+            font-size: 16px;
+            color: var(--color-gray700);
+            background-color: white;
+            margin: 0;
+            padding: 0;
+        }
+        .container{
+            max-width: 960px;
+            margin: 0 auto;
+            padding: 0.5rem;
+        }
+        .box-container {
+            display: flex;
+            flex-wrap: wrap;
+            gap: 1rem;
+        }
+        .color-box {
+            width: 10rem;
+            line-height: 1.5;
+            padding: 0.5rem;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            vertical-align: middle;
+            border-width: 1px;
+            border-style: solid;
+            border-radius: 0.25rem;
+        }
+        .primary{
+            border-color: var(--color-indigo800);
+            background-color: var(--color-indigo600);
+            color: var(--color-gray50);
+        }
+        .primary:hover{
+            background-color: var(--color-indigo700);
+        }
+        .outline-primary{
+            border-color: var(--color-indigo700);
+            background-color: white;
+            color: var(--color-indigo700);
+        }
+        .outline-primary:hover{
+            background-color: var(--color-indigo100);
+        }
+        .secondary{
+            border-color: var(--color-gray800);
+            background-color: var(--color-gray600);
+            color: var(--color-gray50);
+        }
+        .secondary:hover{
+            background-color: var(--color-gray700);
+        }
+        
+        .outline-secondary{
+            border-color: var(--color-gray500);
+            background-color: white;
+            color: var(--color-gray700);
+        }
+        .outline-secondary:hover{
+            background-color: var(--color-gray100);
+        }
+        .danger{
+            border-color: var(--color-vermilion900);
+            background-color: var(--color-vermilion700);
+            color: var(--color-gray50);
+        }
+        .danger:hover{
+            background-color: var(--color-vermilion800);
+        }
+        
+        .outline-danger{
+            border-color: var(--color-vermilion700);
+            background-color: white;
+            color: var(--color-vermilion700);
+        }
+        .outline-danger:hover{
+            background-color: var(--color-vermilion100);
+        }
+        .warning{
+            border-color: var(--color-yellow600  );
+            background-color: var(--color-yellow400);
+            color: var(--color-gray900);
+        }
+        .warning:hover{
+            background-color: var(--color-yellow500);
+        }
+        
+        .outline-warning{
+            border-color: var(--color-yellow600);
+            background-color: white;
+            color: var(--color-yellow600);
+        }
+        .outline-warning:hover{
+            background-color: var(--color-yellow100);
+        }
+
+        .success{
+            border-color: var(--color-green800  );
+            background-color: var(--color-green600);
+            color: var(--color-gray50);
+        }
+        .success:hover{
+            background-color: var(--color-green700);
+        }
+        
+        .outline-success{
+            border-color: var(--color-green600);
+            background-color: white;
+            color: var(--color-green600);
+        }
+        .outline-success:hover{
+            background-color: var(--color-green100);
+        }
+        .info{
+            border-color: var(--color-cyan800);
+            background-color: var(--color-cyan600);
+            color: var(--color-gray50);
+        }
+        .info:hover{
+            background-color: var(--color-cyan700);
+        }
+        
+        .outline-info{
+            border-color: var(--color-cyan600);
+            background-color: white;
+            color: var(--color-cyan600);
+        }
+        .outline-info:hover{
+            background-color: var(--color-cyan100);
+        }
+        .light{
+            border-color: var(--color-gray300);
+            background-color: var(--color-gray100);
+            color: var(--color-gray600);
+        }
+        .light:hover{
+            background-color: var(--color-gray200);
+        }
+        
+        .outline-light{
+            border-color: var(--color-gray300);
+            background-color: white;
+            color: var(--color-gray600);
+        }
+        .outline-light:hover{
+            background-color: var(--color-gray100);
+        }
+        .dark{
+            border-color: var(--color-gray900);
+            background-color: var(--color-gray700);
+            color: var(--color-gray50);
+        }
+        .dark:hover{
+            background-color: var(--color-gray800);
+        }
+        
+        .outline-dark{
+            border-color: var(--color-gray700);
+            background-color: white;
+            color: var(--color-gray900);
+        }
+        .outline-dark:hover{
+            background-color: var(--color-gray100);
+        }
+
+        .horizontal{
+            margin-top: 1rem;   
+            display: flex;
+            gap: 1rem;
+            font-size: 14px;
+        }
+</style>
+</head>
+<body>
+    <h1 class="container">Sample Pallet Application</h1>
+    <p class="container">This is a sample pallet application.</p>
+    <div class="container">
+        <div class="horizontal">
+            <div class="color-box primary">primary</div>
+            <div class="color-box secondary">secondary</div>
+            <div class="color-box danger">danger</div>
+            <div class="color-box warning">warning</div>
+            <div class="color-box success">success</div>
+            <div class="color-box info">info</div>
+        </div>
+        <div class="horizontal">
+            <div class="color-box outline-primary">primary</div>
+            <div class="color-box outline-secondary">secondary</div>
+            <div class="color-box outline-danger">danger</div>
+            <div class="color-box outline-warning">warning</div>
+            <div class="color-box outline-success">success</div>
+            <div class="color-box outline-info">info</div>
+        </div>
+        <div class="horizontal">
+            <div class="color-box light">light</div>
+            <div class="color-box dark">dark</div>
+        </div>
+        <div class="horizontal">
+            <div class="color-box outline-light">light</div>
+            <div class="color-box outline-dark">dark</div>
+        </div>
+    </div>
+</body>
+</html>
